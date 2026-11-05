@@ -1,9 +1,10 @@
 defmodule Color do
-  @enforce_keys [:simbolo, :nombre, :hex]
   defstruct [:simbolo, :nombre, :hex]
 
-  def parse(linea) when is_binary(linea) do
-    case String.split(String.trim(linea), ",") do
+  def parse(linea) do
+    campos = String.split(String.trim(linea), ",")
+
+    case campos do
       [simbolo, nombre, hex] ->
         simbolo = String.trim(simbolo)
         nombre = String.trim(nombre)
@@ -20,15 +21,41 @@ defmodule Color do
             {:error, "el color debe tener formato #RRGGBB"}
 
           true ->
-            {:ok, %__MODULE__{simbolo: simbolo, nombre: nombre, hex: hex}}
+            color = %__MODULE__{
+              simbolo: simbolo,
+              nombre: nombre,
+              hex: hex
+            }
+
+            {:ok, color}
         end
 
       _ ->
-        {:error, "se esperaban: simbolo,nombre,#RRGGBB"}
+        {:error, "se esperaban tres campos: simbolo,nombre,#RRGGBB"}
     end
   end
 
-  def hex_valido?(hex) do
-    String.match?(hex, ~r/^#[0-9A-Fa-f]{6}$/)
+  defp hex_valido?("#" <> digitos) do
+    revisar_digitos(String.to_charlist(digitos), 0)
+  end
+
+  defp hex_valido?(_texto) do
+    false
+  end
+
+  defp revisar_digitos([], 6) do
+    true
+  end
+
+  defp revisar_digitos([digito | resto], cantidad)
+       when cantidad < 6 and
+              ((digito >= ?0 and digito <= ?9) or
+                 (digito >= ?a and digito <= ?f) or
+                 (digito >= ?A and digito <= ?F)) do
+    revisar_digitos(resto, cantidad + 1)
+  end
+
+  defp revisar_digitos(_resto, _cantidad) do
+    false
   end
 end

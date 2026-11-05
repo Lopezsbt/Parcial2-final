@@ -1,4 +1,5 @@
-defmodule Parcial2.Problema2.Region do
+defmodule Region do
+
   defstruct [:id, :simbolo, :celdas, :area, :perimetro, :desde, :hasta]
 
   def crear(id, simbolo, celdas, perimetro) do
