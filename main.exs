@@ -2,6 +2,7 @@ Code.require_file("Color.ex", __DIR__)
 Code.require_file("Region.ex", __DIR__)
 Code.require_file("Detector_regiones.ex", __DIR__)
 Code.require_file("Validacion_map.ex", __DIR__)
+Code.require_file("Reporte_regiones.ex", __DIR__)
 
 defmodule Main do
   def main do
