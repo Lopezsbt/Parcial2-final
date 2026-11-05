@@ -31,6 +31,14 @@ defmodule Main do
       IO.inspect("Regiones encontradas")
       IO.inspect(regiones)
 
+      ruta_csv = Path.join(__DIR__, "regiones.csv")
+         Reporte_regiones.guardar_csv(ruta_csv, regiones)
+         IO.puts("Se guardó regiones.csv")
+
+      ruta_resumen = Path.join(__DIR__, "resumen_regiones.txt")
+         Reporte_regiones.guardar_resumen(ruta_resumen, regiones)
+         IO.puts("Se guardó resumen_regiones.txt")
+
       {:error, errores} ->
         IO.puts("Se encontraron errores:")
         Enum.each(errores, &IO.puts/1)
