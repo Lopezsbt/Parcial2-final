@@ -19,8 +19,16 @@ defmodule Main do
       |> Enum.to_list()
 
     case Validacion_map.validar(filas, colores) do
-      {:ok, _filas, _paleta, cantidad_filas, cantidad_columnas} ->
-        IO.puts("Mapa válido: #{cantidad_filas} filas y #{cantidad_columnas} columnas.")
+
+      {:ok, filas, _paleta, cantidad_filas, cantidad_columnas} ->
+      regiones =
+        Detector_regiones.encontrar(
+          filas,
+          cantidad_filas,
+          cantidad_columnas
+        )
+      IO.inspect("Regiones encontradas")
+      IO.inspect(regiones)
 
       {:error, errores} ->
         IO.puts("Se encontraron errores:")
