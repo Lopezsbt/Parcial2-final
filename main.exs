@@ -3,6 +3,7 @@ Code.require_file("Region.ex", __DIR__)
 Code.require_file("Detector_regiones.ex", __DIR__)
 Code.require_file("Validacion_map.ex", __DIR__)
 Code.require_file("Reporte_regiones.ex", __DIR__)
+Code.require_file("Exportador_svg.ex", __DIR__)
 
 defmodule Main do
   def main do
@@ -21,7 +22,7 @@ defmodule Main do
 
     case Validacion_map.validar(filas, colores) do
 
-      {:ok, filas, _paleta, cantidad_filas, cantidad_columnas} ->
+      {:ok, filas, paleta, cantidad_filas, cantidad_columnas} ->
       regiones =
         Detector_regiones.encontrar(
           filas,
@@ -38,6 +39,18 @@ defmodule Main do
       ruta_resumen = Path.join(__DIR__, "resumen_regiones.txt")
          Reporte_regiones.guardar_resumen(ruta_resumen, regiones)
          IO.puts("Se guardó resumen_regiones.txt")
+
+      ruta_svg = Path.join(__DIR__, "mapa_regiones.svg")
+         Exportador_svg.exportar(
+          ruta_svg,
+          filas,
+          paleta,
+          regiones,
+          cantidad_filas,
+          cantidad_columnas
+          )
+
+      IO.puts("Se guardó mapa_regiones.svg")
 
       {:error, errores} ->
         IO.puts("Se encontraron errores:")
