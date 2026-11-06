@@ -1,0 +1,2 @@
+Línea 8: A,A,2,1 -> tramo de un centro a sí mismo (A → A)
+Línea 9: A,B,9,7 -> repetición de A → B (se conserva la primera, línea 2)

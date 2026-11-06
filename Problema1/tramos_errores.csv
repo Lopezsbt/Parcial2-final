@@ -1,0 +1,11 @@
+# casos con errores y duplicados
+A,B,8,5
+B,C,3
+C,D,abc,2
+D,E,-4,1
+E,F,0,1
+,G,5,5
+A,B,9,7
+B,A,2,2
+B,B,1,1
+F,G,4,4

@@ -1,0 +1,6 @@
+A,A
+A,Z
+Z,A
+B,A
+A,B
+linea sin coma
